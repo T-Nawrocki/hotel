@@ -12,7 +12,7 @@ const createRouter = function (collection) {
       .find()
       .toArray()
       .then(docs => res.json(docs))
-      .catch(err => errorHandler(err));
+      .catch(err => errorHandler(res, err));
   });
 
   // CREATE
@@ -21,21 +21,19 @@ const createRouter = function (collection) {
     collection
       .insertOne(newData)
       .then(result => res.json(result.ops[0]))
-      .catch(err => errorHandler(err));
+      .catch(err => errorHandler(res, err));
   });
 
   // DELETE
   router.delete('/:id', (req, res) => {
       const id = req.params.id;
 
-      console.log('id :>> ', id);
-
       collection
       .deleteOne({ _id: ObjectID(id) })
       .then(result => {
           res.json(result)
       })
-      .catch(err => errorHandler(err));
+      .catch(err => errorHandler(res, err));
   })
   
   return router

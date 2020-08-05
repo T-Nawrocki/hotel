@@ -24,7 +24,7 @@ export default {
   methods: {
     cancelBooking () {
       BookingsService.deleteBooking(this.booking._id)
-        .then(eventBus.$emit("booking-deleted", this.booking._id));
+        .then(() => eventBus.$emit("booking-deleted", this.booking._id));
     }
   }
 }
