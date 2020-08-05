@@ -11,7 +11,8 @@
 
 <script>
 import BookingsService from "../services/BookingsService.js";
-import BookingItem from "./BookingItem.vue"
+import BookingItem from "./BookingItem.vue";
+import { eventBus } from "@/main.js";
 
 export default {
   name: "BookingsList",
@@ -27,9 +28,13 @@ export default {
   },
 
   mounted () {
-    // fetch bookings list from server
     BookingsService.getBookings()
       .then(data => this.bookings = data);
+
+    eventBus.$on("booking-deleted", (id) => {
+      const index = this.bookings.findIndex(booking => booking._id === id)
+      this.bookings.splice(index, 1);
+    })
   }
 }
 </script>
