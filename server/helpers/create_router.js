@@ -1,4 +1,5 @@
 const express = require("express");
+const errorHandler = require("./error_handler")
 
 const createRouter = function (collection) {
 
@@ -10,14 +11,17 @@ const createRouter = function (collection) {
       .find()
       .toArray()
       .then(docs => res.json(docs))
-      .catch(err => {
-         console.error(err);
-         res.status(500);
-         res.json({ status: 500, error: err })
-      });
+      .catch(err => errorHandler(err));
   });
 
   // CREATE
+  router.post("/", (req, res) => {
+    const newData = req.body;
+    collection
+      .insertOne(newData)
+      .then(result => res.json(result.ops[0]))
+      .catch(err => errorHandler(err));
+  });
 
   // DELETE
   
