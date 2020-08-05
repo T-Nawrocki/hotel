@@ -1,5 +1,6 @@
 const express = require("express");
 const errorHandler = require("./error_handler")
+const ObjectID = require("mongodb").ObjectID;
 
 const createRouter = function (collection) {
 
@@ -24,6 +25,18 @@ const createRouter = function (collection) {
   });
 
   // DELETE
+  router.delete('/:id', (req, res) => {
+      const id = req.params.id;
+
+      console.log('id :>> ', id);
+
+      collection
+      .deleteOne({ _id: ObjectID(id) })
+      .then(result => {
+          res.json(result)
+      })
+      .catch(err => errorHandler(err));
+  })
   
   return router
 
