@@ -3,33 +3,35 @@
     <h1>Add New Booking</h1>
     <form v-on:submit="addBooking">
 
-      <div class="form-item">
-        <label for="name-input">Name</label>
-        <input type="text" id="name-input" v-model="name" required>
-      </div>
+      <div id="questions">
+        <div class="form-item">
+          <label for="name-input">Name</label>
+          <input type="text" id="name-input" v-model="name" required>
+        </div>
 
-      <div class="form-item">
-        <label for="email-input">Email</label>
-        <input type="text" id="email-input" v-model="email" required>
-      </div>
+        <div class="form-item">
+          <label for="email-input">Email</label>
+          <input type="text" id="email-input" v-model="email" required>
+        </div>
 
-      <div class="form-item">
-        <label>Checked In?</label>
+        <div class="form-item">
+          <label>Checked In?</label>
 
-        <div id="radio-buttons">
-          <input type="radio" 
-                name="checkedIn"
-                id="checked-in-true"
-                v-model="checkedIn"
-                v-bind:value="true">
-          <label for="checked-in-true">Yes</label>
+          <div id="radio-buttons">
+            <input type="radio" 
+                  name="checkedIn"
+                  id="checked-in-true"
+                  v-model="checkedIn"
+                  v-bind:value="true">
+            <label for="checked-in-true">Yes</label>
 
-          <input type="radio" 
-                name="checkedIn"
-                id="checked-in-false"
-                v-model="checkedIn"
-                v-bind:value="false">
-          <label for="checked-in-false">No</label>
+            <input type="radio" 
+                  name="checkedIn"
+                  id="checked-in-false"
+                  v-model="checkedIn"
+                  v-bind:value="false">
+            <label for="checked-in-false">No</label>
+          </div>
         </div>
       </div>
 
@@ -77,5 +79,23 @@ export default {
 </script>
 
 <style>
+
+#booking-form {
+  padding-top: 60px;
+}
+
+#questions {
+  display: flex;
+  justify-content: center;
+}
+
+.form-item {
+  padding: 10px;
+}
+
+#radio-buttons, .form-item > input {
+  display: block;
+  width: 200px;
+}
 
 </style>

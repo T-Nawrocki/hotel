@@ -45,4 +45,8 @@ export default {
 
 <style>
 
+#bookings-list {
+  padding-top: 60px;
+}
+
 </style>
