@@ -69,6 +69,9 @@ export default {
       if (booking.name && booking.email) {
         BookingsService.postBooking(booking)
           .then(res => eventBus.$emit("booking-added", res));
+        
+        this.name = this.email = "";
+        this.checkedIn = null;
       } else {
         console.log("FAILED TO SAVE: Booking requires name and email.");
       }
