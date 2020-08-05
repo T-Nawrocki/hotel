@@ -5,12 +5,12 @@
 
       <div class="form-item">
         <label for="name-input">Name</label>
-        <input type="text" id="name-input" v-model="name">
+        <input type="text" id="name-input" v-model="name" required>
       </div>
 
       <div class="form-item">
         <label for="email-input">Email</label>
-        <input type="text" id="email-input" v-model="email">
+        <input type="text" id="email-input" v-model="email" required>
       </div>
 
       <div class="form-item">
@@ -64,8 +64,12 @@ export default {
         checkedIn: this.checkedIn
       };
 
-      BookingsService.postBooking(booking)
-        .then(res => eventBus.$emit("booking-added", res));
+      if (booking.name && booking.email) {
+        BookingsService.postBooking(booking)
+          .then(res => eventBus.$emit("booking-added", res));
+      } else {
+        console.log("FAILED TO SAVE: Booking requires name and email.");
+      }
     }
   }
 
